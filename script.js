@@ -41,6 +41,23 @@ navLinks.forEach((link) => {
   });
 });
 
+// Close mobile menu when clicking outside
+document.addEventListener("click", (e) => {
+  if (!mainNav || !menuToggle) return;
+  if (!mainNav.contains(e.target) && !menuToggle.contains(e.target) && mainNav.classList.contains("open")) {
+    mainNav.classList.remove("open");
+    menuToggle.setAttribute("aria-expanded", "false");
+  }
+});
+
+// Handle escape key to close mobile menu
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape" && mainNav?.classList.contains("open")) {
+    mainNav.classList.remove("open");
+    menuToggle?.setAttribute("aria-expanded", "false");
+  }
+});
+
 // Smooth scroll header animation
 window.addEventListener("scroll", () => {
   if (!siteHeader) return;
@@ -152,6 +169,7 @@ contactForm?.addEventListener("submit", (event) => {
 // Services tabs (services.html)
 const serviceTabs = document.querySelectorAll("[data-services-tab]");
 const servicePanels = document.querySelectorAll("[data-services-panel]");
+const serviceTabsContainer = document.querySelector(".services-tabs");
 
 const setActiveServiceTab = (key) => {
   if (!key) return;
@@ -170,6 +188,14 @@ const setActiveServiceTab = (key) => {
       panel.setAttribute("hidden", "");
     }
   });
+
+  // Auto-scroll to active tab on mobile
+  if (serviceTabsContainer && window.innerWidth <= 760) {
+    const activeTab = document.querySelector(`[data-services-tab="${key}"]`);
+    if (activeTab) {
+      activeTab.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "center" });
+    }
+  }
 };
 
 serviceTabs.forEach((tab) => {

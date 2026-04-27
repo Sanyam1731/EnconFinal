@@ -4,7 +4,7 @@ const navLinks = document.querySelectorAll(".nav a");
 const statNumbers = document.querySelectorAll(".count");
 const contactForm = document.querySelector(".contact-form");
 const sectionsToReveal = document.querySelectorAll(".section, .page-hero, .hero");
-const staggerTargets = ".card, .service-item, .feature-grid article, .stat, .industries span, .contact-form, .office";
+const staggerTargets = ".card, .service-item, .service-card, .services-tab, .feature-grid article, .stat, .industries span, .contact-form, .office";
 const themeToggle = document.getElementById("themeToggle");
 const siteHeader = document.querySelector(".site-header");
 
@@ -148,3 +148,59 @@ contactForm?.addEventListener("submit", (event) => {
     btn.disabled = false;
   }, 1800);
 });
+
+// Services tabs (services.html)
+const serviceTabs = document.querySelectorAll("[data-services-tab]");
+const servicePanels = document.querySelectorAll("[data-services-panel]");
+
+const setActiveServiceTab = (key) => {
+  if (!key) return;
+  serviceTabs.forEach((tab) => {
+    const isActive = tab.getAttribute("data-services-tab") === key;
+    tab.classList.toggle("is-active", isActive);
+    tab.setAttribute("aria-selected", isActive ? "true" : "false");
+  });
+
+  servicePanels.forEach((panel) => {
+    const isActive = panel.getAttribute("data-services-panel") === key;
+    panel.classList.toggle("is-active", isActive);
+    if (isActive) {
+      panel.removeAttribute("hidden");
+    } else {
+      panel.setAttribute("hidden", "");
+    }
+  });
+};
+
+serviceTabs.forEach((tab) => {
+  tab.addEventListener("click", () => {
+    const key = tab.getAttribute("data-services-tab");
+    setActiveServiceTab(key);
+    if (key) {
+      history.replaceState(null, "", `#${key}`);
+    }
+  });
+});
+
+if (serviceTabs.length) {
+  const initialKey = (location.hash || "").replace("#", "");
+  const exists = Array.from(serviceTabs).some((t) => t.getAttribute("data-services-tab") === initialKey);
+  setActiveServiceTab(exists ? initialKey : serviceTabs[0].getAttribute("data-services-tab"));
+}
+
+// Service accordions: keep only one open at a time (per card)
+document.addEventListener(
+  "toggle",
+  (event) => {
+    const details = event.target;
+    if (!(details instanceof HTMLDetailsElement)) return;
+    if (!details.classList.contains("service-accordion")) return;
+    if (!details.open) return;
+
+    const scope = details.closest(".service-card-body") || document;
+    scope.querySelectorAll(".service-accordion").forEach((other) => {
+      if (other !== details) other.open = false;
+    });
+  },
+  true
+);

@@ -230,3 +230,81 @@ document.addEventListener(
   },
   true
 );
+
+// Slideshow functionality
+let currentSlideIndex = 1;
+let slideAutoPlayInterval;
+
+const showSlide = (n) => {
+  const slides = document.querySelectorAll(".slide");
+  const dots = document.querySelectorAll(".dot");
+  
+  if (n > slides.length) {
+    currentSlideIndex = 1;
+  }
+  if (n < 1) {
+    currentSlideIndex = slides.length;
+  }
+  
+  slides.forEach((slide) => {
+    slide.classList.remove("active");
+  });
+  
+  dots.forEach((dot) => {
+    dot.classList.remove("active");
+  });
+  
+  if (slides[currentSlideIndex - 1]) {
+    slides[currentSlideIndex - 1].classList.add("active");
+  }
+  
+  if (dots[currentSlideIndex - 1]) {
+    dots[currentSlideIndex - 1].classList.add("active");
+  }
+};
+
+const changeSlide = (n) => {
+  clearInterval(slideAutoPlayInterval);
+  currentSlideIndex += n;
+  showSlide(currentSlideIndex);
+  autoPlaySlideshow();
+};
+
+const currentSlide = (n) => {
+  clearInterval(slideAutoPlayInterval);
+  currentSlideIndex = n;
+  showSlide(currentSlideIndex);
+  autoPlaySlideshow();
+};
+
+const autoPlaySlideshow = () => {
+  slideAutoPlayInterval = setInterval(() => {
+    currentSlideIndex += 1;
+    showSlide(currentSlideIndex);
+  }, 5000); // Change slide every 5 seconds
+};
+
+// Initialize slideshow
+const prevBtn = document.getElementById("prevBtn");
+const nextBtn = document.getElementById("nextBtn");
+
+if (prevBtn && nextBtn) {
+  prevBtn.addEventListener("click", () => changeSlide(-1));
+  nextBtn.addEventListener("click", () => changeSlide(1));
+  
+  // Start auto-play
+  showSlide(currentSlideIndex);
+  autoPlaySlideshow();
+  
+  // Pause on hover
+  const slideshowContainer = document.querySelector(".slideshow-container");
+  if (slideshowContainer) {
+    slideshowContainer.addEventListener("mouseenter", () => {
+      clearInterval(slideAutoPlayInterval);
+    });
+    
+    slideshowContainer.addEventListener("mouseleave", () => {
+      autoPlaySlideshow();
+    });
+  }
+}

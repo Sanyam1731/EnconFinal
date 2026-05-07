@@ -1101,7 +1101,7 @@ body.theme-dark .btn-ghost {
 }
 
 .footer-grid {
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.6fr) minmax(0, 0.9fr);
   align-items: start;
 }
 
@@ -1110,6 +1110,11 @@ body.theme-dark .btn-ghost {
   border: 1px solid rgba(166, 208, 255, 0.2);
   border-radius: 14px;
   padding: 0.9rem 1rem;
+  min-width: 0;
+}
+
+.footer-col:nth-child(2) .footer-line {
+  font-size: 0.85rem;
 }
 
 .footer-col h3,
@@ -1135,6 +1140,8 @@ body.theme-dark .btn-ghost {
   font-size: 0.92rem;
   line-height: 1.45;
   color: #d9e8ff;
+  overflow-wrap: anywhere;
+  word-break: break-word;
 }
 
 .footer-icon {

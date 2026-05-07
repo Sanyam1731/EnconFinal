@@ -1323,6 +1323,43 @@ body.theme-dark .btn-ghost {
   padding: 1rem;
 }
 
+.slide-caption {
+  position: absolute;
+  left: 50%;
+  bottom: 56px;
+  transform: translateX(-50%);
+  background: rgba(15, 33, 62, 0.78);
+  color: #ffffff;
+  padding: 0.55rem 1.1rem;
+  border-radius: 999px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  z-index: 5;
+  max-width: 85%;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+body.theme-dark .slide-caption {
+  background: rgba(108, 242, 209, 0.18);
+  color: #eaf6ff;
+  border: 1px solid rgba(108, 242, 209, 0.35);
+}
+
+@media (max-width: 600px) {
+  .slide-caption {
+    font-size: 0.8rem;
+    bottom: 48px;
+    padding: 0.4rem 0.85rem;
+  }
+}
+
 .slide.active {
   opacity: 1;
 }

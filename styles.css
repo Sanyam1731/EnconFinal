@@ -966,7 +966,7 @@ body.theme-dark .service-accordion-content {
 
 .stats {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 1rem;
 }
 
@@ -2741,7 +2741,7 @@ body.theme-dark .dot:hover {
   }
 
   .stats {
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   }
 
   .team-grid {

@@ -1101,16 +1101,19 @@ body.theme-dark .btn-ghost {
 }
 
 .footer-grid {
-  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.6fr) minmax(0, 0.9fr);
-  align-items: start;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  align-items: stretch;
 }
 
 .footer-col {
+  display: flex;
+  flex-direction: column;
   background: rgba(255, 255, 255, 0.08);
   border: 1px solid rgba(166, 208, 255, 0.2);
   border-radius: 14px;
   padding: 0.9rem 1rem;
   min-width: 0;
+  height: 100%;
 }
 
 .footer-col:nth-child(2) .footer-line {
@@ -1294,7 +1297,7 @@ body.theme-dark .btn-ghost {
 
 .slideshow-container {
   position: relative;
-  max-width: 1100px;
+  max-width: 900px;
   margin: 0 auto;
   border-radius: 16px;
   overflow: hidden;
@@ -1305,7 +1308,7 @@ body.theme-dark .btn-ghost {
 .slides-wrapper {
   position: relative;
   width: 100%;
-  padding-bottom: 95%;
+  padding-bottom: 80%;
   overflow: hidden;
 }
 

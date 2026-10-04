@@ -1,10 +1,15 @@
+if (window.location.hostname === "sanyam1731.github.io") {
+  const robotsMeta = document.createElement("meta");
+  robotsMeta.name = "robots";
+  robotsMeta.content = "noindex, nofollow";
+  document.head.appendChild(robotsMeta);
+}
+
 const menuToggle = document.getElementById("menuToggle");
 const mainNav = document.getElementById("mainNav");
 const navLinks = document.querySelectorAll(".nav a");
-const statNumbers = document.querySelectorAll(".count");
-const contactForm = document.querySelector(".contact-form");
 const sectionsToReveal = document.querySelectorAll(".section, .page-hero, .hero");
-const staggerTargets = ".card, .service-item, .service-card, .services-tab, .feature-grid article, .stat, .industries span, .contact-form, .office";
+const staggerTargets = ".card, .service-item, .service-card, .services-tab, .feature-grid article, .industries span, .office";
 const themeToggle = document.getElementById("themeToggle");
 const siteHeader = document.querySelector(".site-header");
 
@@ -70,43 +75,6 @@ window.addEventListener("scroll", () => {
   }
 });
 
-const animateCounters = () => {
-  statNumbers.forEach((counter) => {
-    const target = Number(counter.dataset.target || 0);
-    const start = 0;
-    const duration = 1400;
-    const startTime = performance.now();
-
-    const tick = (time) => {
-      const progress = Math.min((time - startTime) / duration, 1);
-      const value = Math.floor(start + (target - start) * progress);
-      counter.textContent = value.toLocaleString("en-IN");
-      if (progress < 1) {
-        requestAnimationFrame(tick);
-      }
-    };
-
-    requestAnimationFrame(tick);
-  });
-};
-
-const observer = new IntersectionObserver(
-  (entries, obs) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        animateCounters();
-        obs.disconnect();
-      }
-    });
-  },
-  { threshold: 0.35 }
-);
-
-const awardsSection = document.getElementById("awards");
-if (awardsSection) {
-  observer.observe(awardsSection);
-}
-
 sectionsToReveal.forEach((section) => {
   section.classList.add("reveal-item");
   const children = section.querySelectorAll(staggerTargets);
@@ -150,20 +118,6 @@ navLinks.forEach((link) => {
       }
     }
   });
-});
-
-contactForm?.addEventListener("submit", (event) => {
-  event.preventDefault();
-  const btn = contactForm.querySelector("button");
-  const initialLabel = btn.textContent;
-  btn.textContent = "Message Sent ✓";
-  btn.disabled = true;
-  contactForm.reset();
-
-  setTimeout(() => {
-    btn.textContent = initialLabel;
-    btn.disabled = false;
-  }, 1800);
 });
 
 // Services tabs (services.html)

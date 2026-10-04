@@ -27,6 +27,19 @@ const setThemeIcon = () => {
 
 setThemeIcon();
 
+const contactEmailForm = document.getElementById("contactEmailForm");
+contactEmailForm?.addEventListener("submit", (event) => {
+  event.preventDefault();
+  const formData = new FormData(contactEmailForm);
+  const name = formData.get("name");
+  const email = formData.get("email");
+  const subject = formData.get("subject");
+  const message = formData.get("message");
+  const body = `Name: ${name}\nEmail: ${email}\n\n${message}`;
+  const whatsappUrl = `https://wa.me/917350542020?text=${encodeURIComponent(`Subject: ${subject}\n\n${body}`)}`;
+  window.location.href = whatsappUrl;
+});
+
 themeToggle?.addEventListener("click", () => {
   document.body.classList.toggle("theme-dark");
   localStorage.setItem("encon-theme", document.body.classList.contains("theme-dark") ? "dark" : "light");

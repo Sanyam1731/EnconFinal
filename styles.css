@@ -1368,57 +1368,90 @@ body.theme-dark .btn-ghost {
 
 .team-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1.5rem;
-  margin-top: 2rem;
+  grid-template-columns: repeat(4, minmax(220px, 1fr));
+  gap: 1.4rem;
+  margin-top: 1.75rem;
+  align-items: stretch;
 }
 
 .team-member {
-  background: linear-gradient(160deg, rgba(34, 49, 75, 0.78), rgba(25, 37, 57, 0.86)) padding-box,
-    linear-gradient(130deg, #7BC94A, #FF6B35, #7BC94A) border-box;
-  border: 1px solid transparent;
-  border-radius: 16px;
-  padding: 1.5rem;
-  text-align: center;
-  backdrop-filter: blur(10px);
-  box-shadow: 0 8px 28px rgba(18, 28, 48, 0.3);
-  transition: transform 0.28s ease;
-}
-
-.team-member-image {
-  width: 180px;
-  height: 180px;
-  border-radius: 12px;
-  object-fit: cover;
-  margin-bottom: 1rem;
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
+  background: linear-gradient(180deg, rgba(59, 73, 69, 0.96), rgba(42, 50, 52, 0.96));
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 10px 24px rgba(18, 26, 32, 0.12);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  min-height: 290px;
 }
 
 .team-member:hover {
   transform: translateY(-4px);
+  box-shadow: 0 18px 30px rgba(18, 26, 32, 0.18);
+}
+
+.team-member.has-photo {
+  min-height: 450px;
+}
+
+.team-member-photo-wrap {
+  background: #efefef;
+  border-bottom: 4px solid rgba(123, 201, 74, 0.9);
+  min-height: 250px;
+}
+
+.team-member-image {
+  width: 100%;
+  height: 250px;
+  border-radius: 0;
+  object-fit: cover;
+  display: block;
+  background: #fff;
+}
+
+.team-member-body {
+  padding: 1.1rem 1.15rem 1.35rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  min-height: 180px;
+}
+
+.no-photo-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 220px;
 }
 
 .team-member h3 {
-  margin: 0 0 0.5rem;
-  color: #f2f6ff;
-  font-size: 1.2rem;
-  font-weight: 600;
+  margin: 0 0 0.45rem;
+  color: #f4f7fb;
+  font-size: clamp(1.05rem, 1.6vw, 1.6rem);
+  line-height: 1.2;
+  font-weight: 700;
+}
+
+.team-name-block {
+  margin-top: -0.15rem;
 }
 
 .team-position {
-  color: #9ADF6E;
-  font-weight: 500;
-  margin: 0.5rem 0;
-  font-size: 0.95rem;
+  margin: 0.35rem 0 0;
+  color: #8fe89b;
+  font-size: 1.02rem;
+  font-weight: 600;
+  line-height: 1.45;
 }
 
 .team-contact {
-  color: #b3c4df;
-  font-size: 0.9rem;
-  margin: 0.5rem 0 0;
-  opacity: 0.9;
+  color: #f5f7fb;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin-top: 0.75rem;
+}
+
+.final-card {
+  grid-column: 1 / 2;
 }
 
 /* Logos Carousel */
@@ -3062,6 +3095,104 @@ body.theme-dark .dot:hover {
 
   .cards {
     grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  }
+}
+
+body .team-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(220px, 1fr));
+  gap: 1.4rem;
+  margin-top: 1.75rem;
+  align-items: stretch;
+}
+
+body .team-member {
+  background: linear-gradient(180deg, rgba(59, 73, 69, 0.96), rgba(42, 50, 52, 0.96));
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 10px 24px rgba(18, 26, 32, 0.12);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  min-height: 290px;
+}
+
+body .team-member.has-photo {
+  min-height: 450px;
+}
+
+body .team-member-photo-wrap {
+  background: #efefef;
+  border-bottom: 4px solid rgba(123, 201, 74, 0.9);
+  min-height: 250px;
+}
+
+body .team-member-image {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+  display: block;
+  background: #fff;
+}
+
+body .team-member-body {
+  padding: 1.1rem 1.15rem 1.35rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  min-height: 180px;
+}
+
+body .no-photo-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 220px;
+}
+
+body .team-member h3 {
+  margin: 0 0 0.45rem;
+  color: #f4f7fb;
+  font-size: clamp(1.05rem, 1.6vw, 1.6rem);
+  line-height: 1.2;
+  font-weight: 700;
+}
+
+body .team-name-block {
+  margin-top: -0.15rem;
+}
+
+body .team-position {
+  margin: 0.35rem 0 0;
+  color: #8fe89b;
+  font-size: 1.02rem;
+  font-weight: 600;
+  line-height: 1.45;
+}
+
+body .team-contact {
+  color: #f5f7fb;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin-top: 0.75rem;
+}
+
+body .final-card {
+  grid-column: 1 / 2;
+}
+
+@media (max-width: 1100px) {
+  body .team-grid {
+    grid-template-columns: repeat(2, minmax(220px, 1fr));
+  }
+
+  body .final-card {
+    grid-column: auto;
+  }
+}
+
+@media (max-width: 768px) {
+  body .team-grid {
+    grid-template-columns: 1fr;
   }
 }
 

@@ -7,11 +7,64 @@ if (window.location.hostname === "sanyam1731.github.io") {
 
 const menuToggle = document.getElementById("menuToggle");
 const mainNav = document.getElementById("mainNav");
+const servicesNavLink = mainNav?.querySelector('a[href="services.html"]');
+if (servicesNavLink) {
+  const servicesItem = document.createElement("li");
+  servicesItem.className = "nav-dropdown";
+
+  const servicesToggle = document.createElement("button");
+  servicesToggle.className = "nav-dropdown-toggle";
+  servicesToggle.type = "button";
+  servicesToggle.textContent = "Services";
+  servicesToggle.setAttribute("aria-expanded", "false");
+  servicesToggle.setAttribute("aria-haspopup", "true");
+  servicesToggle.setAttribute("aria-controls", "servicesDropdown");
+  const servicesChevron = document.createElement("span");
+  servicesChevron.className = "nav-dropdown-chevron";
+  servicesChevron.setAttribute("aria-hidden", "true");
+  servicesToggle.append(servicesChevron);
+
+  const servicesMenu = document.createElement("ul");
+  servicesMenu.className = "nav-dropdown-menu";
+  servicesMenu.id = "servicesDropdown";
+
+  [
+    ["GHG Verification Services", "ghg-verification.html"],
+    ["NISST", "index.html#nisst"],
+    ["ADEETIE", "index.html#adeetie"],
+  ].forEach(([label, href]) => {
+    const item = document.createElement("li");
+    const link = document.createElement("a");
+    link.textContent = label;
+    link.href = href;
+    item.append(link);
+    servicesMenu.append(item);
+  });
+
+  servicesToggle.addEventListener("click", () => {
+    const isOpen = servicesToggle.getAttribute("aria-expanded") === "true";
+    servicesToggle.setAttribute("aria-expanded", String(!isOpen));
+    servicesItem.classList.toggle("is-open", !isOpen);
+  });
+
+  servicesItem.append(servicesToggle, servicesMenu);
+  servicesNavLink.closest("li").replaceWith(servicesItem);
+}
 const navLinks = document.querySelectorAll(".nav a");
 const sectionsToReveal = document.querySelectorAll(".section, .page-hero, .hero");
 const staggerTargets = ".card, .service-item, .service-card, .services-tab, .feature-grid article, .industries span, .office";
 const themeToggle = document.getElementById("themeToggle");
 const siteHeader = document.querySelector(".site-header");
+const ghgProcessAnimation = document.getElementById("ghgProcessAnimation");
+const ghgProcessReplay = document.getElementById("ghgProcessReplay");
+
+ghgProcessReplay?.addEventListener("click", () => {
+  if (!ghgProcessAnimation) return;
+  ghgProcessAnimation.classList.add("is-replaying");
+  void ghgProcessAnimation.offsetWidth;
+  ghgProcessAnimation.querySelectorAll("animateMotion").forEach((animation) => animation.beginElement());
+  ghgProcessAnimation.classList.remove("is-replaying");
+});
 
 const storedTheme = localStorage.getItem("encon-theme");
 if (storedTheme === "dark") {
@@ -56,11 +109,21 @@ navLinks.forEach((link) => {
   link.addEventListener("click", () => {
     mainNav.classList.remove("open");
     menuToggle?.setAttribute("aria-expanded", "false");
+    const servicesItem = link.closest(".nav-dropdown");
+    if (servicesItem) {
+      servicesItem.classList.remove("is-open");
+      servicesItem.querySelector(".nav-dropdown-toggle")?.setAttribute("aria-expanded", "false");
+    }
   });
 });
 
 // Close mobile menu when clicking outside
 document.addEventListener("click", (e) => {
+  const servicesItem = mainNav?.querySelector(".nav-dropdown");
+  if (servicesItem && !servicesItem.contains(e.target)) {
+    servicesItem.classList.remove("is-open");
+    servicesItem.querySelector(".nav-dropdown-toggle")?.setAttribute("aria-expanded", "false");
+  }
   if (!mainNav || !menuToggle) return;
   if (!mainNav.contains(e.target) && !menuToggle.contains(e.target) && mainNav.classList.contains("open")) {
     mainNav.classList.remove("open");
@@ -70,6 +133,14 @@ document.addEventListener("click", (e) => {
 
 // Handle escape key to close mobile menu
 document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape") {
+    const servicesItem = mainNav?.querySelector(".nav-dropdown.is-open");
+    if (servicesItem) {
+      servicesItem.classList.remove("is-open");
+      servicesItem.querySelector(".nav-dropdown-toggle")?.setAttribute("aria-expanded", "false");
+      servicesItem.querySelector(".nav-dropdown-toggle")?.focus();
+    }
+  }
   if (e.key === "Escape" && mainNav?.classList.contains("open")) {
     mainNav.classList.remove("open");
     menuToggle?.setAttribute("aria-expanded", "false");
@@ -205,29 +276,21 @@ let slideAutoPlayInterval;
 const showSlide = (n) => {
   const slides = document.querySelectorAll(".slide");
   const dots = document.querySelectorAll(".dot");
-  
-  if (n > slides.length) {
-    currentSlideIndex = 1;
-  }
-  if (n < 1) {
-    currentSlideIndex = slides.length;
-  }
-  
-  slides.forEach((slide) => {
-    slide.classList.remove("active");
+
+  if (!slides.length) return;
+  currentSlideIndex = ((n - 1 + slides.length) % slides.length) + 1;
+
+  slides.forEach((slide, index) => {
+    const isActive = index === currentSlideIndex - 1;
+    slide.classList.toggle("active", isActive);
+    slide.setAttribute("aria-hidden", String(!isActive));
   });
-  
-  dots.forEach((dot) => {
-    dot.classList.remove("active");
+
+  dots.forEach((dot, index) => {
+    const isActive = index === currentSlideIndex - 1;
+    dot.classList.toggle("active", isActive);
+    dot.setAttribute("aria-pressed", String(isActive));
   });
-  
-  if (slides[currentSlideIndex - 1]) {
-    slides[currentSlideIndex - 1].classList.add("active");
-  }
-  
-  if (dots[currentSlideIndex - 1]) {
-    dots[currentSlideIndex - 1].classList.add("active");
-  }
 };
 
 const changeSlide = (n) => {
@@ -254,10 +317,19 @@ const autoPlaySlideshow = () => {
 // Initialize slideshow
 const prevBtn = document.getElementById("prevBtn");
 const nextBtn = document.getElementById("nextBtn");
+const slideDots = document.querySelectorAll(".dot");
 
 if (prevBtn && nextBtn) {
   prevBtn.addEventListener("click", () => changeSlide(-1));
   nextBtn.addEventListener("click", () => changeSlide(1));
+  slideDots.forEach((dot) => {
+    dot.addEventListener("click", () => {
+      const slideIndex = Number(dot.getAttribute("data-slide-index"));
+      if (Number.isInteger(slideIndex) && slideIndex > 0) {
+        currentSlide(slideIndex);
+      }
+    });
+  });
   
   // Start auto-play
   showSlide(currentSlideIndex);

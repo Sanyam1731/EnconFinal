@@ -30,8 +30,8 @@ if (servicesNavLink) {
 
   [
     ["GHG Verification Services", "ghg-verification.html"],
-    ["NISST", "index.html#nisst"],
-    ["ADEETIE", "index.html#adeetie"],
+    ["NISST", "nisst-verification.html"],
+    ["ADEETIE", "adeetie.html"],
   ].forEach(([label, href]) => {
     const item = document.createElement("li");
     const link = document.createElement("a");
@@ -55,15 +55,21 @@ const sectionsToReveal = document.querySelectorAll(".section, .page-hero, .hero"
 const staggerTargets = ".card, .service-item, .service-card, .services-tab, .feature-grid article, .industries span, .office";
 const themeToggle = document.getElementById("themeToggle");
 const siteHeader = document.querySelector(".site-header");
-const ghgProcessAnimation = document.getElementById("ghgProcessAnimation");
-const ghgProcessReplay = document.getElementById("ghgProcessReplay");
+const processReplayControls = [
+  ["ghgProcessReplay", "ghgProcessAnimation"],
+  ["nisstProcessReplay", "nisstProcessAnimation"],
+  ["adeetieProcessReplay", "adeetieProcessAnimation"]
+];
 
-ghgProcessReplay?.addEventListener("click", () => {
-  if (!ghgProcessAnimation) return;
-  ghgProcessAnimation.classList.add("is-replaying");
-  void ghgProcessAnimation.offsetWidth;
-  ghgProcessAnimation.querySelectorAll("animateMotion").forEach((animation) => animation.beginElement());
-  ghgProcessAnimation.classList.remove("is-replaying");
+processReplayControls.forEach(([buttonId, animationId]) => {
+  document.getElementById(buttonId)?.addEventListener("click", () => {
+    const processAnimation = document.getElementById(animationId);
+    if (!processAnimation) return;
+    processAnimation.classList.add("is-replaying");
+    void processAnimation.offsetWidth;
+    processAnimation.querySelectorAll("animateMotion").forEach((animation) => animation.beginElement());
+    processAnimation.classList.remove("is-replaying");
+  });
 });
 
 const storedTheme = localStorage.getItem("encon-theme");

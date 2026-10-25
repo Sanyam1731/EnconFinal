@@ -1076,6 +1076,241 @@ h2 {
   }
 }
 
+.nisst-services-section {
+  border-top: 1px solid rgba(90, 168, 58, 0.18);
+}
+
+.nisst-services-section > .container > p:not(.section-kicker) {
+  max-width: 850px;
+}
+
+.nisst-services-focus {
+  padding: 0.85rem 1rem;
+  border-left: 4px solid var(--primary);
+  background: color-mix(in srgb, var(--primary) 9%, transparent);
+}
+
+.nisst-services-assessment,
+.nisst-services-verification {
+  margin-top: 3rem;
+}
+
+.nisst-services-flow {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 0.75rem;
+  margin-top: 2rem;
+}
+
+.nisst-services-step {
+  position: relative;
+  min-width: 0;
+  padding: 1.1rem 0.85rem;
+  border: 1px solid color-mix(in srgb, var(--primary) 38%, transparent);
+  border-radius: 8px;
+  background: var(--glass);
+  box-shadow: var(--shadow-soft);
+  opacity: 0;
+  transform: translateY(18px);
+  animation: nisst-services-reveal 0.55s ease forwards;
+  animation-delay: var(--step-delay);
+}
+
+.nisst-services-step > span {
+  display: grid;
+  width: 2.25rem;
+  height: 2.25rem;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--primary);
+  color: #fff;
+  font-size: 0.78rem;
+  font-weight: 800;
+}
+
+.nisst-services-step h4 {
+  margin: 0.75rem 0 0.45rem;
+  font-size: 0.95rem;
+}
+
+.nisst-services-step p {
+  margin: 0;
+  font-size: 0.82rem;
+  line-height: 1.45;
+}
+
+.nisst-services-step:not(:last-child)::after {
+  position: absolute;
+  z-index: 2;
+  top: 2rem;
+  right: -0.7rem;
+  width: 0;
+  height: 0;
+  border-top: 6px solid transparent;
+  border-bottom: 6px solid transparent;
+  border-left: 8px solid var(--primary);
+  content: "";
+  filter: drop-shadow(0 0 4px color-mix(in srgb, var(--primary) 55%, transparent));
+  animation: nisst-services-pulse 1.4s ease-in-out infinite;
+  animation-delay: var(--step-delay);
+}
+
+.nisst-services-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.nisst-services-grid article {
+  min-height: 170px;
+  padding: 1.1rem;
+  border-left: 4px solid var(--primary);
+  border-radius: 6px;
+  background: var(--glass);
+  box-shadow: var(--shadow-soft);
+  animation: nisst-services-reveal 0.55s ease both;
+}
+
+.nisst-services-grid article:nth-child(2n) { animation-delay: .15s; }
+.nisst-services-grid article:nth-child(3n) { animation-delay: .3s; }
+
+.nisst-services-tag {
+  color: var(--primary-dark);
+  font-size: 0.78rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.nisst-services-grid h4 {
+  margin: 0.55rem 0 0.4rem;
+}
+
+.nisst-services-grid p {
+  margin: 0;
+}
+
+@keyframes nisst-services-reveal {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.nisst-focus {
+  max-width: 850px;
+  padding: 0.85rem 1rem;
+  border-left: 4px solid var(--primary);
+  background: color-mix(in srgb, var(--primary) 9%, transparent);
+}
+
+.nisst-process-row {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.nisst-verification-section {
+  border-top: 1px solid rgba(90, 168, 58, 0.18);
+}
+
+.nisst-verification-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.nisst-verification-grid article {
+  position: relative;
+  min-height: 180px;
+  padding: 1.2rem;
+  overflow: hidden;
+  border: 1px solid color-mix(in srgb, var(--primary) 35%, transparent);
+  border-radius: 8px;
+  background: var(--glass);
+  box-shadow: var(--shadow-soft);
+  animation: ghg-process-card-in 0.55s ease both;
+}
+
+.nisst-verification-grid article:nth-child(2) { animation-delay: .15s; }
+.nisst-verification-grid article:nth-child(3) { animation-delay: .3s; }
+.nisst-verification-grid article:nth-child(4) { animation-delay: .45s; }
+.nisst-verification-grid article:nth-child(5) { animation-delay: .6s; }
+.nisst-verification-grid article:nth-child(6) { animation-delay: .75s; }
+
+.nisst-verification-grid article > span {
+  color: var(--primary);
+  font-size: 1.8rem;
+  font-weight: 800;
+  opacity: 0.28;
+}
+
+.nisst-verification-grid h3 {
+  margin: 0.35rem 0 0.5rem;
+  font-size: 1.05rem;
+}
+
+.nisst-verification-grid p {
+  margin: 0;
+}
+
+@media (max-width: 1100px) {
+  .nisst-verification-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 620px) {
+  .nisst-verification-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@keyframes nisst-services-pulse {
+  50% { transform: translateX(5px); opacity: 0.55; }
+}
+
+@media (max-width: 1100px) {
+  .nisst-services-flow {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.5rem;
+  }
+
+  .nisst-services-step:not(:last-child)::after {
+    right: -1.05rem;
+  }
+
+  .nisst-services-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 620px) {
+  .nisst-services-flow,
+  .nisst-services-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .nisst-services-step:not(:last-child)::after {
+    top: calc(100% + 0.15rem);
+    right: calc(50% - 6px);
+    border-top: 8px solid var(--primary);
+    border-right: 6px solid transparent;
+    border-bottom: 0;
+    border-left: 6px solid transparent;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nisst-services-step,
+  .nisst-services-step:not(:last-child)::after,
+  .nisst-services-grid article {
+    animation: none !important;
+  }
+
+  .nisst-services-step {
+    opacity: 1;
+    transform: none;
+  }
+}
+
 .windmill-section {
   background: linear-gradient(180deg, #f2fdff 0%, #e9f7ff 100%);
 }
@@ -1679,6 +1914,12 @@ body.theme-dark .service-accordion-content {
   border-radius: 14px;
   background: linear-gradient(180deg, #ffffff 0%, #f5faff 100%);
   box-shadow: 0 8px 20px rgba(17, 28, 46, 0.1);
+}
+
+#clients .program-service > a {
+  display: block;
+  color: inherit;
+  text-decoration: none;
 }
 
 #clients .program-service-label {

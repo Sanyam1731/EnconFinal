@@ -1785,6 +1785,92 @@ body.theme-dark .service-accordion {
   border-color: rgba(108, 242, 209, 0.18);
 }
 
+.internship-card {
+  padding: 1.5rem;
+  border: 1px solid rgba(123, 201, 74, 0.8);
+  border-radius: 16px;
+  background: #ffffff;
+  box-shadow: 0 10px 24px rgba(31, 42, 59, 0.1);
+}
+
+.internship-card-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid rgba(123, 201, 74, 0.25);
+}
+
+.internship-card-header h3 {
+  margin: 0;
+  color: var(--text);
+}
+
+.internship-type {
+  margin: 0 0 0.35rem;
+  color: #5fae36;
+  font-size: 0.82rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.internship-status {
+  flex-shrink: 0;
+  padding: 0.4rem 0.7rem;
+  border-radius: 999px;
+  background: rgba(123, 201, 74, 0.16);
+  color: #4f982e;
+  font-size: 0.82rem;
+  font-weight: 700;
+}
+
+.internship-content {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+  padding: 1rem 0;
+}
+
+.internship-content h4 {
+  margin: 0 0 0.4rem;
+  color: #5fae36;
+}
+
+.internship-content p {
+  margin-top: 0;
+}
+
+.internship-note {
+  grid-column: 1 / -1;
+  margin-bottom: 0;
+  padding: 0.8rem 1rem;
+  border-left: 3px solid var(--primary);
+  background: rgba(123, 201, 74, 0.08);
+}
+
+body.theme-dark .internship-card {
+  background: #1a2847;
+  border-color: rgba(108, 242, 209, 0.65);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.25);
+}
+
+body.theme-dark .internship-status {
+  background: rgba(108, 242, 209, 0.12);
+  color: #6cf2d1;
+}
+
+@media (max-width: 760px) {
+  .internship-card-header {
+    flex-direction: column;
+  }
+
+  .internship-content {
+    grid-template-columns: 1fr;
+  }
+}
+
 body.theme-dark .service-accordion-content {
   color: rgba(232, 240, 255, 0.84);
 }
@@ -1898,17 +1984,17 @@ body.theme-dark .service-accordion-content {
   color: #f3f7ff;
 }
 
-#clients .program-services-title {
+#services .program-services-title {
   margin: 1.5rem 0 0.75rem;
 }
 
-#clients .program-services {
+#services .program-services {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 1rem;
 }
 
-#clients .program-service {
+#services .program-service {
   padding: 1.1rem;
   border: 1px solid rgba(123, 201, 74, 0.8);
   border-radius: 14px;
@@ -1916,13 +2002,13 @@ body.theme-dark .service-accordion-content {
   box-shadow: 0 8px 20px rgba(17, 28, 46, 0.1);
 }
 
-#clients .program-service > a {
+#services .program-service > a {
   display: block;
   color: inherit;
   text-decoration: none;
 }
 
-#clients .program-service-label {
+#services .program-service-label {
   margin: 0 0 0.5rem;
   color: #5fae36;
   font-size: 0.8rem;
@@ -1931,20 +2017,20 @@ body.theme-dark .service-accordion-content {
   text-transform: uppercase;
 }
 
-#clients .program-service h3 {
+#services .program-service h3 {
   margin: 0 0 0.5rem;
 }
 
-#clients .program-service p:last-child {
+#services .program-service p:last-child {
   margin: 0;
 }
 
-body.theme-dark #clients .program-service {
+body.theme-dark #services .program-service {
   background: linear-gradient(180deg, #1a2847 0%, #15233f 100%);
   border-color: rgba(108, 242, 209, 0.65);
 }
 
-body.theme-dark #clients .program-service-label {
+body.theme-dark #services .program-service-label {
   color: #6cf2d1;
 }
 
@@ -2506,7 +2592,7 @@ body.theme-dark .dot:hover {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  #clients .program-services {
+  #services .program-services {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
@@ -2555,7 +2641,7 @@ body.theme-dark .dot:hover {
 }
 
 @media (max-width: 760px) {
-  #clients .program-services {
+  #services .program-services {
     grid-template-columns: 1fr;
   }
 

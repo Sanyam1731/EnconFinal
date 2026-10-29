@@ -4015,10 +4015,10 @@ body.theme-dark .dot:hover {
 body .team-grid {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  grid-auto-rows: 430px;
+  grid-auto-rows: auto;
   gap: 1.25rem;
   margin-top: 1.75rem;
-  align-items: stretch;
+  align-items: start;
 }
 
 body .team-member {
@@ -4037,6 +4037,17 @@ body .team-member {
 }
 
 body .team-member.has-photo {
+  height: 430px;
+  min-height: 0;
+}
+
+body .team-member:not(.has-photo) {
+  height: 220px;
+  min-height: 220px;
+  align-self: start;
+}
+
+body .team-member:not(.has-photo) .no-photo-body {
   min-height: 0;
 }
 
@@ -4113,7 +4124,7 @@ body .team-contact {
 @media (max-width: 768px) {
   body .team-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    grid-auto-rows: 410px;
+    grid-auto-rows: auto;
     gap: 1rem;
   }
 
@@ -4122,7 +4133,13 @@ body .team-contact {
   }
 
   body .team-member.has-photo {
+    height: 410px;
     min-height: 0;
+  }
+
+  body .team-member:not(.has-photo) {
+    height: 220px;
+    min-height: 220px;
   }
 
   body .team-member-photo-wrap {
@@ -4138,7 +4155,7 @@ body .team-contact {
 @media (max-width: 520px) {
   body .team-grid {
     grid-template-columns: 1fr;
-    grid-auto-rows: 410px;
+    grid-auto-rows: auto;
   }
 }
 
